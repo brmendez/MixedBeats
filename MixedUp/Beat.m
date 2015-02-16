@@ -6,26 +6,27 @@
 //  Copyright (c) 2014 Kori Kolodziejczak. All rights reserved.
 //
 
-#import "Beat.h"
+#import "Beat.h" 
+
 
 @implementation Beat
 
-- (instancetype) initWithName:(NSString *)name {
-    
-    self = [super init];
-    
-    if (self) {
-        self.name = name;
-    }
-    return self;
+-(instancetype) initWithName:(NSString *)name {
+  
+  self = [super init];
+  
+  if (self) {
+    self.name = name;
+  }
+  return self;
+
 }
 
-+ (NSDictionary *)parseJSONIntoBeats:(NSData *)rawJSONData {
-    NSDictionary *beats = [[NSDictionary alloc] init];
++(NSDictionary *)parseJSONIntoBeats:(NSData *)rawJSONData {
     
+    NSDictionary *beats = [[NSDictionary alloc] init];
     NSError *error = nil;
     NSDictionary *JSONDictionary = [NSJSONSerialization JSONObjectWithData:rawJSONData options:0 error:&error];
-  
   if (error != nil) {
     NSLog(@"json parsing unsuccessful. %@", error.localizedDescription);
   } else {
@@ -43,10 +44,10 @@
 
       } else {
           if ([JSONData isKindOfClass:[NSArray class]]) {
-              NSArray *artistsArray = JSONData;
+              NSArray *moreArray = JSONData;
               
               NSLog(@"data dictionary: %@", JSONData);
-              beats = @{@"artists" : artistsArray,
+              beats = @{@">" : moreArray,
                         };
           }
       }
@@ -58,5 +59,24 @@
   return nil;
 }
 
++(NSMutableArray *)parseJSONIntoPlaylists:(NSData *)rawJSONData{
+	
+	NSMutableArray *beats = [[NSMutableArray alloc] init];
+
+    NSError *error = nil;
+    NSDictionary *JSONDictionary = [NSJSONSerialization JSONObjectWithData:rawJSONData options:0 error:&error];
+	
+	if (error != nil) {
+		NSLog(@"json parsing unsuccessful. %@", error.localizedDescription);
+	
+	} else {
+		
+        NSMutableArray *playlistData = [JSONDictionary valueForKeyPath:@"data"];
+		beats = playlistData;
+
+		
+    }
+	 return beats;
+}
 
 @end

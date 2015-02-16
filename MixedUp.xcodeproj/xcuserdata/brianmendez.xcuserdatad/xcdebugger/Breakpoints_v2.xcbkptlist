@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MixedUp/Beat.m"
-            timestampString = "444449928.496482"
+            timestampString = "445820030.42343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "+parseJSONIntoBeats:"
             landmarkType = "5">
          </BreakpointContent>

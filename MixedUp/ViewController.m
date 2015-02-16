@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-
+#import <Foundation/Foundation.h> 
+#import <AVFoundation/AVFoundation.h>
 @interface ViewController ()
 
 @property (strong, nonatomic) NSString *token;
@@ -15,11 +16,20 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) UIAlertController *alert;
 @property (strong, nonatomic) PlaylistViewController *playlistVC;
+@property (strong, nonatomic) ViewController *searchVC;
+
 @property (strong, nonatomic)  NSArray* beatSectionTitles;
 @property (strong, nonatomic) NSDictionary* beats;
 @property (strong, nonatomic)  NSString *searchTerm;
 
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;
+-(void)moreArtistButtonAction;
+-(void)moreAlbumsButtonAction;
+-(void)moreTracksButtonAction;
+
 @end
+
+
 
 @implementation ViewController
 
@@ -39,22 +49,20 @@
   
   [self.view addGestureRecognizer:leftGestureRecognizer];
   [self.view addGestureRecognizer:rightGestureRecognizer];
-  
+	
 }
 
 -(void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear: animated];
-  
-  self.playlistVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PLAYLIST_VC"];
-  
-  self.playlistVC.playlistArray = [[NSMutableArray alloc]init];
-  
-  self.playlistVC.view.frame = CGRectMake(self.view.frame.size.width * 1.0, 0, self.view.frame.size.width,self.view.frame.size.height);
-  
-  
+	self.searchVC = [self.storyboard instantiateInitialViewController];
+	self.playlistVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PLAYLIST_VC"];
+	self.playlistVC.playlistArray = [[NSMutableArray alloc]init];
+	self.playlistVC.view.frame = CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width,self.view.frame.size.height);
+	self.searchVC.view.frame = CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height);
+
+	
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"authToken"] isKindOfClass:[NSString class]]){
     self.token = [[NSUserDefaults standardUserDefaults] valueForKey:@"authToken"];
-    
     NetworkController *sharedNetworkController = [NetworkController sharedInstance];
     sharedNetworkController.token = self.token;
     
@@ -76,32 +84,25 @@
   }
 }
 
-//<<<<<<< HEAD
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//  return self.beatsArray.count;
-//=======
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-
-    self.searchTerm = [self.searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     
+    self.searchTerm = [self.searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     [[NetworkController sharedInstance] federatedSearchTerm:self.searchTerm completionHandler:^(NSError *error, NSDictionary *beats) {
         self.beats = beats;
         self.beatSectionTitles = [beats allKeys];
-      
-    [self.tableView reloadData];
-  }];
-
+			
+        [self.tableView reloadData];
+		
+	}];
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
   return [self.beatSectionTitles count];
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-  
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
-    /* Create custom view to display section header... */
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 55, 18)];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     [button setTag:section];
@@ -136,29 +137,31 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
      NSString *sectionTitle = [self.beatSectionTitles objectAtIndex:section];
-      NSArray *sectionNames = [self.beats objectForKey:sectionTitle];
-    return [sectionNames count];
- // return self.beatsArray.count;
+      NSArray *sectionObjects = [self.beats objectForKey:sectionTitle];
+    return [sectionObjects count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
-
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
     NSString *sectionTitle = [self.beatSectionTitles objectAtIndex:indexPath.section];
-    NSArray *sectionNames = [self.beats objectForKey:sectionTitle];
-    NSDictionary *beat = [sectionNames objectAtIndex:indexPath.row];
-  cell.textLabel.text = beat[@"display"];
+    NSArray *sectionObjects = [self.beats objectForKey:sectionTitle];
+    NSDictionary *beat = [sectionObjects objectAtIndex:indexPath.row];
+    cell.textLabel.text = beat[@"display"];
   
   return cell;
 }
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  Beat *beat = self.beatsArray[indexPath.row];
-  [self.playlistVC.playlistArray addObject:beat];
-  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *sectionTitle = [self.beatSectionTitles objectAtIndex:indexPath.section];
+    NSArray *sectionObjects = [self.beats objectForKey:sectionTitle];
+    NSDictionary *beat = [sectionObjects objectAtIndex:indexPath.row];
+	
+	NSLog(@"%@", [beat valueForKey:@"result_type"]);
+	
+	[self.playlistVC.playlistArray addObject:beat];
+	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(void)leftSwipeHandler:(UISwipeGestureRecognizer *)recognizer {
@@ -168,7 +171,11 @@
     [self.playlistVC didMoveToParentViewController:(self)];
     [self addChildViewController:self.playlistVC];
     self.playlistVC.view.frame = CGRectMake(self.view.frame.size.width * 0, 0, self.view.frame.size.width, self.view.frame.size.height);
+      
   } completion:^(BOOL finished) {
+	  [[NetworkController sharedInstance]getMyUserID:^(NSError *error, NSString *userID) {
+		  NSLog(@"%@", userID);
+	  }];
     [self.playlistVC.tableView reloadData];
     
   }];
@@ -177,20 +184,22 @@
 -(void)rightSwipeHandler:(UISwipeGestureRecognizer *)recognizer {
   
   [UIView animateWithDuration:0.3 animations:^{
-    self.playlistVC.view.frame = CGRectMake(self.view.frame.size.width * .98, 0, self.view.frame.size.width, self.view.frame.size.height);
+    self.playlistVC.view.frame = CGRectMake(self.view.frame.size.width * 1.0, 0, self.view.frame.size.width, self.view.frame.size.height);
   } completion:^(BOOL finished) {
+	  
   }];
-  
+	
 }
 
 -(void)moreArtistButtonAction{
-  NSLog(@"More Artist");
-  [[NetworkController sharedInstance] moreSearchTerm:self.searchTerm type:@"artist" completionHandler:^(NSError *error, NSDictionary *beats) {
-    self.beats = beats;
-    self.beatSectionTitles = [beats allKeys];
     
-    [self.tableView reloadData];
-  }];
+    NSLog(@"More Artist");
+    [[NetworkController sharedInstance] moreSearchTerm:self.searchTerm type:@"artist" completionHandler:^(NSError *error, NSDictionary *beats) {
+        self.beats = beats;
+        self.beatSectionTitles = [beats allKeys];
+        
+        [self.tableView reloadData];
+    }];
 }
 
 //-(void)moreArtistButtonAction{
@@ -204,22 +213,21 @@
 //}
 
 -(void)moreAlbumsButtonAction{
-    NSLog(@"More Albums");
+	[[NetworkController sharedInstance] moreSearchTerm:self.searchTerm type:@"album" completionHandler:^(NSError *error, NSDictionary *beats) {
+		self.beats = beats;
+		self.beatSectionTitles = [beats allKeys];
+		
+		[self.tableView reloadData];
+	}];
 }
 
 -(void)moreTracksButtonAction{
-    NSLog(@"More Tracks");
-
+	[[NetworkController sharedInstance] moreSearchTerm:self.searchTerm type:@"track" completionHandler:^(NSError *error, NSDictionary *beats) {
+		self.beats = beats;
+		self.beatSectionTitles = [beats allKeys];
+		
+		[self.tableView reloadData];
+	}];
 }
-
-//-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-//  NSString *searchTerm = [self.searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-//  
-//  [[NetworkController sharedInstance] searchTerm:searchTerm completionHandler:^(NSError *error, NSMutableArray *beats) {
-//    self.beatsArray = beats;
-//    [self.tableView reloadData];
-//  }];
-//  
-//}
 
 @end

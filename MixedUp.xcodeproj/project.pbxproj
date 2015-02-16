@@ -8,16 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		453699991A40ED8900643029 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453699981A40ED8900643029 /* PlaylistViewController.m */; };
-
 		45B6405A1A7DC3710031FCB5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B640591A7DC3710031FCB5 /* ViewController.m */; };
 		45B6405D1A7DC5440031FCB5 /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B6405C1A7DC5440031FCB5 /* NetworkController.m */; };
 		45B640601A7DC57E0031FCB5 /* Beat.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B6405F1A7DC57E0031FCB5 /* Beat.m */; };
+		45CC7DB81A92AB6800C7DA56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CC7DB71A92AB6800C7DA56 /* Main.storyboard */; };
 		8B8443B51A32A94F00E04392 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8443B41A32A94F00E04392 /* main.m */; };
 		8B8443B81A32A94F00E04392 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8443B71A32A94F00E04392 /* AppDelegate.m */; };
-		8B8443BE1A32A94F00E04392 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B8443BC1A32A94F00E04392 /* Main.storyboard */; };
 		8B8443C01A32A94F00E04392 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B8443BF1A32A94F00E04392 /* Images.xcassets */; };
 		8B8443C31A32A94F00E04392 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B8443C11A32A94F00E04392 /* LaunchScreen.xib */; };
 		8B8443CF1A32A94F00E04392 /* MixedUpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8443CE1A32A94F00E04392 /* MixedUpTests.m */; };
+		8BB8ED051A8ED1A500543DA6 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8ED041A8ED1A500543DA6 /* Playlist.m */; };
+		8BB8ED081A8EEED600543DA6 /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8ED071A8EEED600543DA6 /* Artist.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,25 +34,27 @@
 /* Begin PBXFileReference section */
 		453699971A40ED8900643029 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		453699981A40ED8900643029 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
-
 		45B640591A7DC3710031FCB5 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		45B6405B1A7DC5440031FCB5 /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
 		45B6405C1A7DC5440031FCB5 /* NetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkController.m; sourceTree = "<group>"; };
 		45B6405E1A7DC57E0031FCB5 /* Beat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beat.h; sourceTree = "<group>"; };
 		45B6405F1A7DC57E0031FCB5 /* Beat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Beat.m; sourceTree = "<group>"; };
-
+		45CC7DB71A92AB6800C7DA56 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8B8443AF1A32A94F00E04392 /* MixedUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MixedUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8443B31A32A94F00E04392 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B8443B41A32A94F00E04392 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8B8443B61A32A94F00E04392 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8B8443B71A32A94F00E04392 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8B8443B91A32A94F00E04392 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8B8443BD1A32A94F00E04392 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B8443BF1A32A94F00E04392 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8B8443C21A32A94F00E04392 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		8B8443C81A32A94F00E04392 /* MixedUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MixedUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8443CD1A32A94F00E04392 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B8443CE1A32A94F00E04392 /* MixedUpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixedUpTests.m; sourceTree = "<group>"; };
+		8BB8ED031A8ED1A500543DA6 /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
+		8BB8ED041A8ED1A500543DA6 /* Playlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
+		8BB8ED061A8EEED600543DA6 /* Artist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Artist.h; sourceTree = "<group>"; };
+		8BB8ED071A8EEED600543DA6 /* Artist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Artist.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,10 @@
 		8B0BC3921A40D3D90050405E /* MODEL */ = {
 			isa = PBXGroup;
 			children = (
+				8BB8ED031A8ED1A500543DA6 /* Playlist.h */,
+				8BB8ED041A8ED1A500543DA6 /* Playlist.m */,
+				8BB8ED061A8EEED600543DA6 /* Artist.h */,
+				8BB8ED071A8EEED600543DA6 /* Artist.m */,
 				45B6405E1A7DC57E0031FCB5 /* Beat.h */,
 				45B6405F1A7DC57E0031FCB5 /* Beat.m */,
 			);
@@ -156,7 +163,7 @@
 		8BEEFAE11A40DB2600A8518F /* VIEW */ = {
 			isa = PBXGroup;
 			children = (
-				8B8443BC1A32A94F00E04392 /* Main.storyboard */,
+				45CC7DB71A92AB6800C7DA56 /* Main.storyboard */,
 			);
 			name = VIEW;
 			sourceTree = "<group>";
@@ -241,7 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B8443BE1A32A94F00E04392 /* Main.storyboard in Resources */,
+				45CC7DB81A92AB6800C7DA56 /* Main.storyboard in Resources */,
 				8B8443C31A32A94F00E04392 /* LaunchScreen.xib in Resources */,
 				8B8443C01A32A94F00E04392 /* Images.xcassets in Resources */,
 			);
@@ -263,6 +270,8 @@
 			files = (
 				45B6405A1A7DC3710031FCB5 /* ViewController.m in Sources */,
 				453699991A40ED8900643029 /* PlaylistViewController.m in Sources */,
+				8BB8ED081A8EEED600543DA6 /* Artist.m in Sources */,
+				8BB8ED051A8ED1A500543DA6 /* Playlist.m in Sources */,
 				8B8443B81A32A94F00E04392 /* AppDelegate.m in Sources */,
 				45B640601A7DC57E0031FCB5 /* Beat.m in Sources */,
 				45B6405D1A7DC5440031FCB5 /* NetworkController.m in Sources */,
@@ -289,14 +298,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8B8443BC1A32A94F00E04392 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8B8443BD1A32A94F00E04392 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8B8443C11A32A94F00E04392 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

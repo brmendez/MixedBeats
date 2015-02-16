@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 #import "NetworkController.h"
-
+#import "Beat.h"
 
 @interface PlaylistViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *playlistArray;

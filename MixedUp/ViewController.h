@@ -12,11 +12,6 @@
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSURLSessionDelegate, UISearchBarDelegate, UIWebViewDelegate>
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;
-@property (strong, nonatomic) NSArray *beatsArray;
 
--(void)moreArtistButtonAction;
--(void)moreAlbumsButtonAction;
--(void)moreTracksButtonAction;
 
 @end
