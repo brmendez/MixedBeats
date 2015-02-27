@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -92,10 +93,10 @@
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vuz-Qi-lME">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
-                                <color key="backgroundColor" red="0.14589251893939381" green="0.14589251893939381" blue="0.14589251893939381" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qc2-fA-24J">
-                                <rect key="frame" x="228" y="7" width="144" height="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qc2-fA-24J">
+                                <rect key="frame" x="116" y="8" width="368" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -105,8 +106,12 @@
                             <constraint firstItem="YxL-Fd-kyE" firstAttribute="top" secondItem="TIb-CT-xmi" secondAttribute="bottom" id="3VJ-Yg-0Ql"/>
                             <constraint firstItem="vuz-Qi-lME" firstAttribute="leading" secondItem="fcH-TA-b8r" secondAttribute="leading" id="BAH-6V-ktK"/>
                             <constraint firstItem="YxL-Fd-kyE" firstAttribute="leading" secondItem="fcH-TA-b8r" secondAttribute="leading" id="Byh-Sr-Mul"/>
+                            <constraint firstItem="qc2-fA-24J" firstAttribute="top" secondItem="fcH-TA-b8r" secondAttribute="topMargin" constant="8" id="Cwt-lm-zwS"/>
+                            <constraint firstItem="TIb-CT-xmi" firstAttribute="top" secondItem="qc2-fA-24J" secondAttribute="bottom" constant="8" id="Cyi-hf-Nd2"/>
                             <constraint firstAttribute="trailing" secondItem="TIb-CT-xmi" secondAttribute="trailing" id="Gu1-k0-8Na"/>
                             <constraint firstItem="TIb-CT-xmi" firstAttribute="top" secondItem="fcH-TA-b8r" secondAttribute="top" constant="64" id="Na6-on-Dv3"/>
+                            <constraint firstItem="qc2-fA-24J" firstAttribute="leading" secondItem="fcH-TA-b8r" secondAttribute="leadingMargin" constant="100" id="Omx-pV-FYO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qc2-fA-24J" secondAttribute="trailing" constant="100" id="VO7-vj-pQi"/>
                             <constraint firstAttribute="trailing" secondItem="vuz-Qi-lME" secondAttribute="trailing" id="eQg-WJ-gjK"/>
                             <constraint firstItem="vuz-Qi-lME" firstAttribute="top" secondItem="fcH-TA-b8r" secondAttribute="top" id="fFe-7M-2j7"/>
                             <constraint firstItem="TIb-CT-xmi" firstAttribute="leading" secondItem="fcH-TA-b8r" secondAttribute="leading" id="m0O-O2-QGQ"/>

@@ -147,9 +147,10 @@
     [label setText:string];
     [view addSubview:label];
     [view addSubview:button];
-    
+		[view setBackgroundColor:[UIColor blackColor]];
+	
     //[view addSubview:button];
-    [view setBackgroundColor:[UIColor colorWithRed:166/255.0 green:177/255.0 blue:186/255.0 alpha:1.0]]; //your background color...
+  //[UIColor colorWithRed:166/255.0 green:177/255.0 blue:186/255.0 alpha:1.0]]; //your background color...
     return view;
 }
 
