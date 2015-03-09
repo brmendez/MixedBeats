@@ -9,6 +9,9 @@
 #import "ViewController.h"
 #import <Foundation/Foundation.h> 
 #import <AVFoundation/AVFoundation.h>
+#import "SWTableViewCell.h"
+#import <SWUtilityButtonView.h>
+
 @interface ViewController ()
 
 @property (strong, nonatomic) NSString *token;
@@ -18,10 +21,16 @@
 @property (strong, nonatomic) PlaylistViewController *playlistVC;
 @property (strong, nonatomic) ViewController *searchVC;
 @property (strong, nonatomic) UITextField *textField;
+//added
+@property (strong, nonatomic) SWUtilityButtonView *utilityButtonView;
+@property (strong, nonatomic) NSArray *utilityButtons;
 
 @property (strong, nonatomic)  NSArray* beatSectionTitles;
 @property (strong, nonatomic) NSDictionary* beats;
 @property (strong, nonatomic)  NSString *searchTerm;
+
+//Swipe Gestures properties
+@property (strong, nonatomic) NSArray *leftButtons;
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;
 -(void)moreArtistButtonAction;
@@ -29,7 +38,6 @@
 -(void)moreTracksButtonAction;
 
 @end
-
 
 
 @implementation ViewController
@@ -51,7 +59,6 @@
 
   [self.view addGestureRecognizer:leftGestureRecognizer];
   [self.view addGestureRecognizer:rightGestureRecognizer];
-	
 
 
 }
@@ -59,7 +66,7 @@
 -(void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear: animated];
 	
-	self.view.backgroundColor = [UIColor grayColor];
+//	self.view.backgroundColor = [UIColor grayColor];
 	self.searchVC = [self.storyboard instantiateInitialViewController];
 	self.playlistVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PLAYLIST_VC"];
 	self.playlistVC.playlistArray = [[NSMutableArray alloc]init];
@@ -137,10 +144,6 @@
     [button sizeToFit];
     button.center = CGPointMake(tableView.frame.size.width - 50, 9);
     
-    
-    
-    
-    
     [label setFont:[UIFont boldSystemFontOfSize:16]];
     NSString *string = [self.beatSectionTitles objectAtIndex:section];
     /* Section header is in 0th index... */
@@ -160,15 +163,45 @@
     return [sectionObjects count];
 }
 
+//MARK: Cell For Row
+//started implementing swipe gestures in cellForRow, first changed UITableViewCell to SWTableViewCell
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
-    NSString *sectionTitle = [self.beatSectionTitles objectAtIndex:indexPath.section];
-    NSArray *sectionObjects = [self.beats objectForKey:sectionTitle];
-    NSDictionary *beat = [sectionObjects objectAtIndex:indexPath.row];
-    cell.textLabel.text = beat[@"display"];
-  
-  return cell;
+	
+	//start
+	SWTableViewCell *cell = (SWTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"CELL"];
+
+		cell = [[SWTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CELL"];
+		cell.leftUtilityButtons = [self leftButtons];
+		cell.delegate = self;	
+
+	cell.detailTextLabel.text = @"Some detail text";
+	
+	NSString *sectionTitle = [self.beatSectionTitles objectAtIndex:indexPath.section];
+	NSArray *sectionObjects = [self.beats objectForKey:sectionTitle];
+	NSDictionary *beat = [sectionObjects objectAtIndex:indexPath.row];
+	cell.textLabel.text = beat[@"display"];
+
+	return cell;
+	//end
+	
+	
+//    NSString *sectionTitle = [self.beatSectionTitles objectAtIndex:indexPath.section];
+//    NSArray *sectionObjects = [self.beats objectForKey:sectionTitle];
+//    NSDictionary *beat = [sectionObjects objectAtIndex:indexPath.row];
+//    cell.textLabel.text = beat[@"display"];
+//  
+//  return cell;
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
+	
+	
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Added!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+	
+	[alertView show];
+	
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -241,5 +274,30 @@
 		[self.tableView reloadData];
 	}];
 }
+
+- (NSArray *)leftButtons
+{
+	NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+
+	[self.utilityButtonView setUtilityButtons:self.utilityButtons WithButtonWidth:200.0];
+	
+	[leftUtilityButtons sw_addUtilityButtonWithColor:
+	[UIColor colorWithRed:0.07 green:0.59f blue:0.59f alpha:1.0]title:@"Add"];
+	
+//	[self.utilityButtonView setUtilityButtons:leftUtilityButtons WithButtonWidth:250];
+	
+//	[leftUtilityButtons sw_addUtilityButtonWithColor:
+//	 [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:1.0]
+//																							icon:[UIImage imageNamed:@"clock.png"]];
+//	[leftUtilityButtons sw_addUtilityButtonWithColor:
+//	 [UIColor colorWithRed:1.0f green:0.231f blue:0.188f alpha:1.0]
+//																							icon:[UIImage imageNamed:@"cross.png"]];
+//	[leftUtilityButtons sw_addUtilityButtonWithColor:
+//	 [UIColor colorWithRed:0.55f green:0.27f blue:0.07f alpha:1.0]
+//																							icon:[UIImage imageNamed:@"list.png"]];
+
+	return leftUtilityButtons;
+}
+
 
 @end

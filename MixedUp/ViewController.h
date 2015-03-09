@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "NetworkController.h"
 #import "PlaylistViewController.h"
+#import <SWTableViewCell.h>
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSURLSessionDelegate, UISearchBarDelegate, UIWebViewDelegate, UITextFieldDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSURLSessionDelegate, UISearchBarDelegate, UIWebViewDelegate, UITextFieldDelegate, SWTableViewCellDelegate>
+
+//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
 
 

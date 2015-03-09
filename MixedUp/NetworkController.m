@@ -52,7 +52,7 @@ NSString* redirectURL = @"somefancyname://test";
   [defaults setValue:([NetworkController sharedInstance].token) forKey:@"authToken"];
   [defaults synchronize];
 
-  NSLog(@"%@", self.token);
+  NSLog(@"ACCESS TOKEN: %@", self.token);
 }
 
 - (void)federatedSearchTerm:(NSString *)name completionHandler: (void(^)(NSError *error, NSDictionary *beats))completionHandler {
